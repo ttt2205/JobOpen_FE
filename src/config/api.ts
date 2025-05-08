@@ -1,4 +1,4 @@
-import { IBackendRes, ICompany, IAccount, IUser, IModelPaginate, IGetAccount, IJob, IResume, IPermission, IRole } from '@/types/backend';
+import { IBackendRes, ICompany, IAccount, IUser, IModelPaginate, IGetAccount, IJob, IResume, IPermission, IRole, IResumeResponse } from '@/types/backend';
 import axios from 'config/axios-customize';
 
 /**
@@ -136,11 +136,11 @@ export const callFetchResume = (query: string) => {
 }
 
 export const callFetchResumeById = (id: string) => {
-    return axios.get<IBackendRes<IResume>>(`/api/v1/resumes/${id}`);
+    return axios.get<IBackendRes<IResumeResponse>>(`/api/v1/resumes/${id}`);
 }
 
 export const callFetchResumeByUser = () => {
-    return axios.post<IBackendRes<IResume[]>>(`/api/v1/resumes/by-user`);
+    return axios.post<IBackendRes<IResumeResponse[]>>(`/api/v1/resumes/by-user`);
 }
 
 /**

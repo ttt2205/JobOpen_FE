@@ -13,6 +13,7 @@ import { setLogoutAction } from '@/redux/slice/accountSlide';
 import ManageAccount from './modal/manage.account';
 import { MessageOutlined } from '@ant-design/icons';
 
+
 const Header = (props: any) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -45,7 +46,12 @@ const Header = (props: any) => {
             label: <Link to={'/company'}>Top Công ty IT</Link>,
             key: '/company',
             icon: <RiseOutlined />,
-        }
+        },
+        {
+            label: <Link to={'/chat-user'}>Chat Public</Link>,
+            key: '/chat-user',
+            icon: <MessageOutlined />,
+        },
     ];
 
 
@@ -78,13 +84,6 @@ const Header = (props: any) => {
             >Trang Quản Trị</Link>,
             key: 'admin',
             icon: <DashOutlined />
-        },
-        {
-            label: <Link
-                to={"/chat/user"}
-            >Chat Open AI</Link>,
-            key: 'chat',
-            icon: <MessageOutlined />
         },
         {
             label: <label

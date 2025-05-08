@@ -22,7 +22,6 @@
     "async-mutex": "0.4.0",
     "autoprefixer": "^10.4.21",
     "axios": "1.6.5",
-    "daisyui": "^4.11.1",
     "dayjs": "1.11.8",
     "dotenv": "16.0.3",
     "eslint": "^8.57.1",

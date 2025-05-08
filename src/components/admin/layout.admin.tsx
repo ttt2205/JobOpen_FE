@@ -110,8 +110,8 @@ const LayoutAdmin = () => {
                     icon: <ExceptionOutlined />
                 }] : []),
                 ...[{
-                    label: <Link to='/chat/admin'>Chat AI</Link>,
-                    key: '/chat/admin',
+                    label: <Link to='/admin/chat-admin'>Chat AI</Link>,
+                    key: '/admin/chat-admin',
                     icon: <MessageOutlined />
                 }]
             ];

@@ -10,13 +10,17 @@ import styles from 'styles/client.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime)
-
+interface SearchValues {
+  skills: string[];
+  location: string[];
+}
 interface IProps {
     showPagination?: boolean;
+    searchJob: SearchValues;
 }
 
 const JobCard = (props: IProps) => {
-    const { showPagination = false } = props;
+    const { showPagination = false, searchJob } = props;
 
     const [displayJob, setDisplayJob] = useState<IJob[] | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -29,8 +33,9 @@ const JobCard = (props: IProps) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log("searchJob: ", searchJob)
         fetchJob();
-    }, [current, pageSize, filter, sortQuery]);
+    }, [current, pageSize, filter, sortQuery, searchJob]);
 
     const fetchJob = async () => {
         setIsLoading(true)
@@ -42,8 +47,23 @@ const JobCard = (props: IProps) => {
             query += `&${sortQuery}`;
         }
 
+        // Thêm skills nếu có
+        if (searchJob.skills && searchJob.skills.length > 0) {
+            for (const skill of searchJob.skills) {
+                query += `&skills=${encodeURIComponent(skill)}`;
+            }
+        }
+
+        // Thêm location nếu có
+        if (searchJob.location && searchJob.location.length > 0) {
+            for (const loc of searchJob.location) {
+                query += `&location=${encodeURIComponent(loc)}`;
+            }
+        }
+
         const res = await callFetchJob(query);
         if (res && res.data) {
+            console.log("setDisplayJob: ", res.data.result)
             setDisplayJob(res.data.result);
             setTotal(res.data.meta.total)
         }

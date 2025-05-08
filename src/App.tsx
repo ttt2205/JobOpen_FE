@@ -94,18 +94,19 @@ export default function App() {
         { path: "job/:id", element: <ClientJobDetailPage /> },
         { path: "company", element: <ClientCompanyPage /> },
         { path: "company/:id", element: <ClientCompanyDetailPage /> },
+        { path: "chat-user", element: <ChatUser /> },
       ],
     },
 
-    {
-      path: "/chat",
-      element: (<LayoutApp><LayoutChat /></LayoutApp>),
-      errorElement: <NotFound />,
-      children: [
-        { path: "user", element: <ChatUser /> },
-        { path: "admin", element: <ChatAdmin /> },
-      ],
-    },
+    // {
+    //   path: "/chat",
+    //   element: (<LayoutApp><LayoutChat /></LayoutApp>),
+    //   errorElement: <NotFound />,
+    //   children: [
+    //     { path: "user", element: <ChatUser /> },
+    //     { path: "admin", element: <ChatAdmin /> },
+    //   ],
+    // },
 
     {
       path: "/admin",
@@ -123,6 +124,13 @@ export default function App() {
           element:
             <ProtectedRoute>
               <CompanyPage />
+            </ProtectedRoute>
+        },
+        {
+          path: "chat-admin",
+          element:
+            <ProtectedRoute>
+              <ChatAdmin /> 
             </ProtectedRoute>
         },
         {

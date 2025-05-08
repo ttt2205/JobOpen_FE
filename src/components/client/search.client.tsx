@@ -3,14 +3,25 @@ import { EnvironmentOutlined, MonitorOutlined } from '@ant-design/icons';
 import { LOCATION_LIST, SKILLS_LIST } from '@/config/utils';
 import { ProForm } from '@ant-design/pro-components';
 
-const SearchClient = () => {
+type SearchValues = {
+  skills: string[];
+  location: string[],
+};
+
+type SearchClientProps = {
+  setSearchJob: (values: SearchValues) => void;
+};
+
+
+const SearchClient = ({ setSearchJob }: SearchClientProps) => {
     const optionsSkills = SKILLS_LIST;
-    const optionsLocations = LOCATION_LIST;
+    const optionsLocations = LOCATION_LIST; 
     const [form] = Form.useForm();
 
 
     const onFinish = async (values: any) => {
-
+        console.log("values search: ", values)
+        setSearchJob(values);
     }
 
     return (
