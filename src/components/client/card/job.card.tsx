@@ -101,31 +101,35 @@ const JobCard = (props: IProps) => {
                             </div>
                         </Col>
 
-                        {displayJob?.map(item => {
-                            return (
-                                <Col span={24} md={12} key={item._id}>
-                                    <Card size="small" title={null} hoverable
-                                        onClick={() => handleViewDetailJob(item)}
-                                    >
-                                        <div className={styles["card-job-content"]}>
-                                            <div className={styles["card-job-left"]}>
-                                                <img
-                                                    alt="example"
-                                                    src={`${import.meta.env.VITE_BACKEND_URL}/images/company/${item?.company?.logo}`}
-                                                />
+                        {displayJob?.filter(item => item.isActive !== false).map(item => (
+                            <Col span={24} md={12} key={item._id}>
+                                <Card size="small" title={null} hoverable onClick={() => handleViewDetailJob(item)}>
+                                    <div className={styles["card-job-content"]}>
+                                        <div className={styles["card-job-left"]}>
+                                            <img
+                                                alt="example"
+                                                src={`${import.meta.env.VITE_BACKEND_URL}/images/company/${item?.company?.logo}`}
+                                            />
+                                        </div>
+                                        <div className={styles["card-job-right"]}>
+                                            <div className={styles["job-title"]}>{item.name}</div>
+                                            <div className={styles["job-location"]}>
+                                                <EnvironmentOutlined style={{ color: '#58aaab' }} />&nbsp;
+                                                {getLocationName(item.location)}
                                             </div>
-                                            <div className={styles["card-job-right"]}>
-                                                <div className={styles["job-title"]}>{item.name}</div>
-                                                <div className={styles["job-location"]}><EnvironmentOutlined style={{ color: '#58aaab' }} />&nbsp;{getLocationName(item.location)}</div>
-                                                <div><ThunderboltOutlined style={{ color: 'orange' }} />&nbsp;{(item.salary + "")?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} đ</div>
-                                                <div className={styles["job-updatedAt"]}>{dayjs(item.updatedAt).fromNow()}</div>
+                                            <div>
+                                                <ThunderboltOutlined style={{ color: 'orange' }} />&nbsp;
+                                                {(item.salary + "").replace(/\B(?=(\d{3})+(?!\d))/g, ',')} đ
+                                            </div>
+                                            <div className={styles["job-updatedAt"]}>
+                                                {dayjs(item.updatedAt).fromNow()}
                                             </div>
                                         </div>
+                                    </div>
+                                </Card>
+                            </Col>
+                        ))}
 
-                                    </Card>
-                                </Col>
-                            )
-                        })}
 
 
                         {(!displayJob || displayJob && displayJob.length === 0)
